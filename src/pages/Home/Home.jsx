@@ -34,9 +34,12 @@ function Home() {
           <img src={mainlogo} alt="" />
         </div>
         <div className="flex flex-col items-center justify-center  h-dvh ">
-          <h1 className="lg:mx-[25%] mx-6 lg:text-5xl text-4xl text-center text-gray-800">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt,
-            quisquam dignissimos ipsam sunt
+          <h1 className="lg:mx-[25%] mx-6 lg:text-5xl text-4xl text-center font-semibold text-gray-700">
+            Study in{' '}
+            <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+              Europe{' '}
+            </span>
+            with expert guidance and endless opportunities. Pre-register today
           </h1>
           <div className="mt-7">
             <button
@@ -50,7 +53,12 @@ function Home() {
         </div>
         <div className="absolute bottom-0 right-0 p-5 text-purple-700">
           <i className="fa-brands fa-instagram "></i>
-          <a className='ps-2' href="https://www.instagram.com/applyeuropa/profilecard/?igsh=MXVwY29uY2JnaTU2Mw==">applyeuropa</a>
+          <a
+            className="ps-2"
+            href="https://www.instagram.com/applyeuropa/profilecard/?igsh=MXVwY29uY2JnaTU2Mw=="
+          >
+            applyeuropa
+          </a>
         </div>
       </div>
 
@@ -63,19 +71,23 @@ function Home() {
           <ModalHeader />
           <ModalBody>
             <div className="space-y-4">
-              <h2 className=" text-center font-semibold text-3xl text-purple-700">
-                sign up
+              <h2 className="text-center font-semibold text-2xl text-purple-700">
+                Sign Up for Pre-Registration
               </h2>
 
               <div>
                 <div className="mb-2 block">
-                  <Label htmlFor="name" className='font-medium'>Name</Label>
+                  <Label htmlFor="name" className="font-medium">
+                    Name
+                  </Label>
                 </div>
                 <TextInput id="name" placeholder="Enter Full Name" required />
               </div>
               <div>
                 <div className="mb-2 block">
-                  <Label htmlFor="email" className='font-medium'>Mail</Label>
+                  <Label htmlFor="email" className="font-medium">
+                    Mail
+                  </Label>
                 </div>
                 <TextInput
                   id="email"
@@ -87,17 +99,22 @@ function Home() {
               </div>
               <div>
                 <div className="mb-2 block">
-                  <Label htmlFor="number" className='font-medium'>Phone</Label>
+                  <Label htmlFor="number" className="font-medium">
+                    Phone
+                  </Label>
                 </div>
                 <TextInput
                   id="number"
+                  maxLength={1}
                   placeholder="Enter Your Mobile Number"
                   required
                 />
               </div>
               <div>
                 <div className="mb-2 block">
-                  <Label htmlFor="location" className='font-medium'>Location</Label>
+                  <Label htmlFor="location" className="font-medium">
+                    Location
+                  </Label>
                 </div>
                 <TextInput
                   id="location"
@@ -107,7 +124,9 @@ function Home() {
               </div>
               <div>
                 <div className="mb-2 block">
-                  <Label htmlFor="password" className='font-medium'>Your password</Label>
+                  <Label htmlFor="password" className="font-medium">
+                    Your password
+                  </Label>
                 </div>
                 <TextInput
                   id="password"
@@ -117,7 +136,7 @@ function Home() {
                 />
               </div>
 
-              <div className="w-full pt-2">
+              <div className="w-full pt-2 flex justify-center">
                 <Button className="cursor-pointer text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:outline-none  shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-400/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
                   Register now
                 </Button>
