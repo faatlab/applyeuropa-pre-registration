@@ -3,7 +3,6 @@ import mainlogo from "../../assets/applyeuropa-logo.svg";
 
 import {
    Button,
-   Checkbox,
    Label,
    Modal,
    ModalBody,
@@ -13,8 +12,8 @@ import {
 } from "flowbite-react";
 import { useState } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
-import { useFrappeCreateDoc } from "frappe-react-sdk";
+import { useFrappeCreateDoc, useFrappeGetDocList } from "frappe-react-sdk";
+import { toast } from "sonner";
 
 function Home() {
    const [openModal, setOpenModal] = useState(false);
@@ -22,10 +21,14 @@ function Home() {
    const [formData, setFormData] = useState({});
    const [isRegistered, setIsRegistered] = useState(false);
    const length = 6;
-   const [otp, setOtp] = useState("".padStart(length, " "));
+   const [otp, setOtp] = useState(Array(length).fill(""));
    const inputRefs = useRef([]);
 
    const { createDoc } = useFrappeCreateDoc();
+   const { data } = useFrappeGetDocList("Student", {
+      fields: ["*"],
+      filters: [["email", "=", formData.email || "anamikagokul09@gmail.com"]],
+   });
 
    function onCloseModal() {
       setOpenModal(false);
@@ -34,7 +37,7 @@ function Home() {
 
    function onClose2Modal() {
       setOpen2Modal(false);
-      setFormData({});
+      setOtp("".padStart(length, " "));
    }
 
    const getFormData = (e) => {
@@ -42,11 +45,12 @@ function Home() {
       setFormData({ ...formData, [name]: value });
    };
 
-   const getOtp = (index, value) => {
+   const getOtp = (index, value, e) => {
+      e.preventDefault();
       if (!isNaN(value) && value !== "") {
-         let newOtp = otp.split(""); // Convert string to array
-         newOtp[index] = value.charAt(0); // Replace the character
-         setOtp(newOtp.join(""));
+         let newOtp = [...otp]; // Spread to avoid mutation
+         newOtp[index] = value.charAt(0); // Replace only the first character
+         setOtp(newOtp); // No need to join, keep it as an array
 
          // Move to the next input
          if (index < length - 1 && inputRefs.current[index + 1]) {
@@ -56,9 +60,10 @@ function Home() {
    };
 
    const handleKeyDown = (index, e) => {
-      if (e.key === "Backspace") {
+      e.preventDefault();
+      if (e.key === "Backspace" || e.key === "Delete") {
          const newOtp = [...otp];
-         newOtp[index] = " ";
+         newOtp[index] = ""; // Clear value
          setOtp(newOtp);
 
          // Move to the previous input
@@ -68,31 +73,44 @@ function Home() {
       }
    };
 
-   const requestOTP = async () => {
-      setOpen2Modal(true);
-      try {
-         await axios.post(
-            `${
-               import.meta.env.VITE_FRAPPE_URL
-            }/api/method/applyeuropa.applyeuropa.doctype.student.student.send_otp_email`,
-            { email: formData.email }
-         );
-      } catch (err) {
-         console.error(err);
+   const requestOTP = async (e) => {
+      e.preventDefault();
+      if (data.length > 0) {
+         toast.warning(`E-mail already registered`);
+      } else {
+         setOpen2Modal(true);
+         try {
+            await axios.post(
+               `${
+                  import.meta.env.VITE_FRAPPE_URL
+               }/api/method/applyeuropa.applyeuropa.doctype.student.student.send_otp_email`,
+               { email: formData.email }
+            );
+         } catch (err) {
+            console.error(err);
+         }
       }
    };
 
-   const verifyOTP = async () => {
+   const verifyOTP = async (e) => {
+      e.preventDefault();
       try {
+         let entered_otp = "";
+         otp.map((num) => {
+            entered_otp = entered_otp + num;
+         });
+
          const response = await axios.post(
             `${
                import.meta.env.VITE_FRAPPE_URL
             }/api/method/applyeuropa.applyeuropa.doctype.student.student.verify_otp`,
             {
                email: formData.email,
-               entered_otp: otp,
+               entered_otp,
             }
          );
+         console.log(response);
+
          const { status } = response.data.message;
          if (status == 200) {
             createDoc("Student", formData).then(() => {
@@ -120,9 +138,9 @@ function Home() {
    return (
       <div className="relative">
          <div className="h-dvh relative overflow-hidden">
-            <div class="absolute -top-50 -right-50 w-[550px] h-[550px] bg-pink-300 rounded-full mix-blend-multiply filter blur-xl divBg opacity-70 "></div>
-            <div class="absolute -bottom-100 right-10 w-[550px] h-[550px] bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-50 divBg animation-delay-2000 hidden md:block"></div>
-            <div class="absolute -bottom-100 -left-50 w-[700px] h-[700px] bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg animation-delay-4000 "></div>
+            <div className="absolute -top-50 -right-50 w-[550px] h-[550px] bg-pink-300 rounded-full mix-blend-multiply filter blur-xl divBg opacity-70 "></div>
+            <div className="absolute -bottom-100 right-10 w-[550px] h-[550px] bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-50 divBg animation-delay-2000 hidden md:block"></div>
+            <div className="absolute -bottom-100 -left-50 w-[700px] h-[700px] bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg animation-delay-4000 "></div>
          </div>
          <div className="heroContent absolute top-0">
             <div className="w-20 mx-3 mt-5 absolute top-0 left-0">
@@ -131,7 +149,10 @@ function Home() {
             <div className="flex flex-col items-center justify-center  h-dvh ">
                {isRegistered ? (
                   <h1 className="lg:mx-[25%] mx-6 lg:text-5xl text-4xl text-center font-semibold text-gray-700">
-                     <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+                     <span
+                        style={{ fontFamily: "myFont2" }}
+                        className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent text-6xl"
+                     >
                         Congratulations!
                      </span>{" "}
                      You’ve successfully registered. We’re thrilled to have you
@@ -200,7 +221,7 @@ function Home() {
                      <div>
                         <div className="mb-2 block">
                            <Label htmlFor="email" className="font-medium">
-                              Mail
+                              E-Mail
                            </Label>
                         </div>
                         <TextInput
@@ -314,12 +335,12 @@ function Home() {
                         </div>
                         <div class="text-center text-sm text-slate-500 mt-4">
                            Didn't receive code?{" "}
-                           <a
+                           <button
                               class="font-medium text-indigo-500 hover:text-indigo-600"
-                              href="#0"
+                              onClick={requestOTP}
                            >
                               Resend
-                           </a>
+                           </button>
                         </div>
                      </form>
                   </div>
