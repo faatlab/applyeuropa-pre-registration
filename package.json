@@ -13,10 +13,13 @@
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@tailwindcss/vite": "^4.0.17",
+    "axios": "^1.8.4",
     "flowbite-react": "^0.11.5",
+    "frappe-react-sdk": "^1.11.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.4.0",
+    "react-toastify": "^11.0.5",
     "tailwindcss": "^4.0.17"
   },
   "devDependencies": {
