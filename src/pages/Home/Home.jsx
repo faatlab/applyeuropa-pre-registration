@@ -19,7 +19,7 @@ function Home() {
    const [openModal, setOpenModal] = useState(false);
    const [open2Modal, setOpen2Modal] = useState(false);
    const [formData, setFormData] = useState({});
-   const [isRegistered, setIsRegistered] = useState(true);
+   const [isRegistered, setIsRegistered] = useState(false);
    const length = 6;
    const [otp, setOtp] = useState(new Array(length).fill(""));
    const inputRefs = useRef([]);
@@ -129,9 +129,9 @@ function Home() {
    };
 
    useEffect(() => {
-      if (localStorage.getItem("AE")) {
-         setIsRegistered(true);
-      }
+      // if (localStorage.getItem("AE")) {
+      //    setIsRegistered(true);
+      // }
       localStorage.removeItem("AE")
    }, []);
 
