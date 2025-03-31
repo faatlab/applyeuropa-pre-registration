@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
@@ -25,7 +24,7 @@ function App() {
                <Route path="/" element={<Home />}></Route>
             </Routes>
          </FrappeProvider>
-         <Toaster position="bottom-center" duration={2100} richColors/>
+         <Toaster position="bottom-center" duration={2100} richColors />
       </>
    );
 }

@@ -19,15 +19,14 @@ function Home() {
    const [openModal, setOpenModal] = useState(false);
    const [open2Modal, setOpen2Modal] = useState(false);
    const [formData, setFormData] = useState({});
-   const [isRegistered, setIsRegistered] = useState(false);
+   const [isRegistered, setIsRegistered] = useState(true);
    const length = 6;
-   const [otp, setOtp] = useState(Array(length).fill(""));
+   const [otp, setOtp] = useState(new Array(length).fill(""));
    const inputRefs = useRef([]);
 
    const { createDoc } = useFrappeCreateDoc();
    const { data } = useFrappeGetDocList("Student", {
-      fields: ["*"],
-      filters: [["email", "=", formData.email || "anamikagokul09@gmail.com"]],
+      fields: ["email"],
    });
 
    function onCloseModal() {
@@ -37,7 +36,7 @@ function Home() {
 
    function onClose2Modal() {
       setOpen2Modal(false);
-      setOtp("".padStart(length, " "));
+      setOtp(Array(length).fill(""));
    }
 
    const getFormData = (e) => {
@@ -45,14 +44,12 @@ function Home() {
       setFormData({ ...formData, [name]: value });
    };
 
-   const getOtp = (index, value, e) => {
-      e.preventDefault();
-      if (!isNaN(value) && value !== "") {
-         let newOtp = [...otp]; // Spread to avoid mutation
-         newOtp[index] = value.charAt(0); // Replace only the first character
-         setOtp(newOtp); // No need to join, keep it as an array
+   const getOtp = (index, value) => {
+      if (!isNaN(value) && value.length === 1) {
+         const newOtp = [...otp];
+         newOtp[index] = value.charAt(0); // Ensure only one character is stored
+         setOtp(newOtp);
 
-         // Move to the next input
          if (index < length - 1 && inputRefs.current[index + 1]) {
             inputRefs.current[index + 1].focus();
          }
@@ -60,13 +57,11 @@ function Home() {
    };
 
    const handleKeyDown = (index, e) => {
-      e.preventDefault();
-      if (e.key === "Backspace" || e.key === "Delete") {
+      if (e.key === "Backspace") {
          const newOtp = [...otp];
-         newOtp[index] = ""; // Clear value
+         newOtp[index] = "";
          setOtp(newOtp);
 
-         // Move to the previous input
          if (index > 0 && inputRefs.current[index - 1]) {
             inputRefs.current[index - 1].focus();
          }
@@ -75,8 +70,12 @@ function Home() {
 
    const requestOTP = async (e) => {
       e.preventDefault();
-      if (data.length > 0) {
-         toast.warning(`E-mail already registered`);
+      const { full_name, email, password, phone_number, location } = formData;
+      if (!full_name || !email || !password || !phone_number || !location) {
+         toast.error("Please fill all the fields");
+      } else if (data.length > 0) {
+         let isUser = data.filter((item) => item.email == email);
+         if (isUser) toast.warning(`E-mail already registered`);
       } else {
          setOpen2Modal(true);
          try {
@@ -84,7 +83,7 @@ function Home() {
                `${
                   import.meta.env.VITE_FRAPPE_URL
                }/api/method/applyeuropa.applyeuropa.doctype.student.student.send_otp_email`,
-               { email: formData.email }
+               { email }
             );
          } catch (err) {
             console.error(err);
@@ -166,7 +165,7 @@ function Home() {
                            Europe{" "}
                         </span>
                         with expert guidance and endless opportunities.
-                        Pre-register today
+                        Pre-register Today!
                      </h1>
                      <div className="mt-7">
                         <button
@@ -227,6 +226,8 @@ function Home() {
                         <TextInput
                            id="email"
                            name="email"
+                           pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+                           title="Must be a valid email id"
                            placeholder="Enter Your Email"
                            onChange={getFormData}
                            required
@@ -241,6 +242,8 @@ function Home() {
                         <TextInput
                            id="number"
                            name="phone_number"
+                           pattern="[0-9]+"
+                           title="Must be a valid mobile number"
                            placeholder="Enter Your Mobile Number"
                            onChange={getFormData}
                            required
@@ -270,6 +273,8 @@ function Home() {
                            id="password"
                            type="password"
                            name="password"
+                           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                           title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
                            onChange={getFormData}
                            placeholder="⁕ ⁕ ⁕ ⁕ ⁕ ⁕"
                            required
@@ -298,22 +303,22 @@ function Home() {
                <ModalHeader />
                <ModalBody>
                   <div className="space-y-6">
-                     <div class="flex flex-col items-center justify-center text-center space-y-2">
-                        <div class="text-center font-semibold text-2xl text-purple-700">
+                     <div className="flex flex-col items-center justify-center text-center space-y-2">
+                        <div className="text-center font-semibold text-2xl text-purple-700">
                            <p>Email Verification</p>
                         </div>
-                        <div class="flex flex-row text-sm font-medium text-gray-400">
+                        <div className="flex flex-row text-sm font-medium text-gray-400">
                            <p>We have sent a code to {formData.email}</p>
                         </div>
                      </div>
 
                      <form id="otp-form">
-                        <div class="flex items-center justify-center gap-3">
-                           {[...otp].map((digit, index) => (
+                        <div className="flex items-center justify-center gap-3">
+                           {otp.map((digit, index) => (
                               <input
+                                 class="w-12 h-12 text-center text-xl font-extrabold text-purple-800 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded  outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
                                  key={index}
                                  type="number"
-                                 class="w-12 h-12 text-center text-xl font-extrabold text-purple-800 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded  outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
                                  pattern="\d*"
                                  maxLength={1}
                                  name="otp1"
@@ -324,19 +329,19 @@ function Home() {
                               />
                            ))}
                         </div>
-                        <div class="max-w-[260px] mx-auto mt-4">
+                        <div className="max-w-[260px] mx-auto mt-4">
                            <Button
                               // type="submit"
-                              class="cursor-pointer w-full inline-flex justify-center whitespace-nowrap px-3.5 py-2.5 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:outline-none  shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-400/80 font-medium rounded-lg text-sm hover:bg-indigo-600 transition-colors duration-150"
+                              className="cursor-pointer w-full inline-flex justify-center whitespace-nowrap px-3.5 py-2.5 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:outline-none  shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-400/80 font-medium rounded-lg text-sm hover:bg-indigo-600 transition-colors duration-150"
                               onClick={verifyOTP}
                            >
                               Verify OTP
                            </Button>
                         </div>
-                        <div class="text-center text-sm text-slate-500 mt-4">
+                        <div className="text-center text-sm text-slate-500 mt-4">
                            Didn't receive code?{" "}
                            <button
-                              class="font-medium text-indigo-500 hover:text-indigo-600"
+                              className="font-medium text-indigo-500 hover:text-indigo-600"
                               onClick={requestOTP}
                            >
                               Resend
