@@ -132,6 +132,7 @@ function Home() {
       if (localStorage.getItem("AE")) {
          setIsRegistered(true);
       }
+      localStorage.removeItem("AE")
    }, []);
 
    return (
