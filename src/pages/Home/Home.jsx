@@ -14,6 +14,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useFrappeCreateDoc, useFrappeGetDocList } from "frappe-react-sdk";
 import { toast } from "sonner";
+import OTPInput from "react-otp-input";
 
 function Home() {
    const [openModal, setOpenModal] = useState(false);
@@ -21,7 +22,7 @@ function Home() {
    const [formData, setFormData] = useState({});
    const [isRegistered, setIsRegistered] = useState(false);
    const length = 6;
-   const [otp, setOtp] = useState(new Array(length).fill(""));
+   const [otp, setOtp] = useState("");
    const inputRefs = useRef([]);
 
    const { createDoc } = useFrappeCreateDoc();
@@ -56,17 +57,10 @@ function Home() {
       }
    };
 
-   const handleKeyDown = (index, e) => {
-      if (e.key === "Backspace") {
-         const newOtp = [...otp];
-         newOtp[index] = "";
-         setOtp(newOtp);
-
-         if (index > 0 && inputRefs.current[index - 1]) {
-            inputRefs.current[index - 1].focus();
-         }
-      }
-   };
+   // const handlePaste = (event) => {
+   //    const data = event.clipboardData.getData("text");
+   //    console.log(data);
+   // };
 
    const requestOTP = async (e) => {
       e.preventDefault();
@@ -132,7 +126,7 @@ function Home() {
       // if (localStorage.getItem("AE")) {
       //    setIsRegistered(true);
       // }
-      localStorage.removeItem("AE")
+      localStorage.removeItem("AE");
    }, []);
 
    return (
@@ -199,7 +193,7 @@ function Home() {
             <Modal show={openModal} size="md" onClose={onCloseModal} popup>
                <ModalHeader />
                <ModalBody>
-                  <div className="space-y-4">
+                  <form onSubmit={requestOTP} className="space-y-4">
                      <h2 className="text-center font-semibold text-2xl text-purple-700">
                         Sign Up for Pre-Registration
                      </h2>
@@ -213,6 +207,7 @@ function Home() {
                         <TextInput
                            id="name"
                            name="full_name"
+                           type={"text"}
                            placeholder="Enter Full Name"
                            onChange={getFormData}
                            required
@@ -227,6 +222,7 @@ function Home() {
                         <TextInput
                            id="email"
                            name="email"
+                           type={"email"}
                            pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
                            title="Must be a valid email id"
                            placeholder="Enter Your Email"
@@ -244,6 +240,7 @@ function Home() {
                            id="number"
                            name="phone_number"
                            pattern="[0-9]+"
+                           type={"number"}
                            title="Must be a valid mobile number"
                            placeholder="Enter Your Mobile Number"
                            onChange={getFormData}
@@ -259,6 +256,7 @@ function Home() {
                         <TextInput
                            id="location"
                            name="location"
+                           type={"text"}
                            placeholder="Enter Your Location"
                            onChange={getFormData}
                            required
@@ -274,8 +272,8 @@ function Home() {
                            id="password"
                            type="password"
                            name="password"
-                           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                           title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+                           pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
+                           title="Must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters"
                            onChange={getFormData}
                            placeholder="⁕ ⁕ ⁕ ⁕ ⁕ ⁕"
                            required
@@ -284,13 +282,13 @@ function Home() {
 
                      <div className="w-full pt-2 flex justify-center">
                         <Button
+                           type={"submit"}
                            className="cursor-pointer text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:outline-none  shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-400/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                           onClick={requestOTP}
                         >
                            Register now
                         </Button>
                      </div>
-                  </div>
+                  </form>
                </ModalBody>
             </Modal>
 
@@ -314,22 +312,20 @@ function Home() {
                      </div>
 
                      <form id="otp-form">
-                        <div className="flex items-center justify-center gap-3">
-                           {otp.map((digit, index) => (
-                              <input
-                                 class="w-12 h-12 text-center text-xl font-extrabold text-purple-800 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded  outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
-                                 key={index}
-                                 type="number"
-                                 pattern="\d*"
-                                 maxLength={1}
-                                 name="otp1"
-                                 value={digit}
-                                 ref={(el) => (inputRefs.current[index] = el)}
-                                 onChange={(e) => getOtp(index, e.target.value)}
-                                 onKeyDown={(e) => handleKeyDown(index, e)}
-                              />
-                           ))}
-                        </div>
+                        <OTPInput
+                           value={otp}
+                           onChange={setOtp}
+                           numInputs={6}
+                           containerStyle={"w-full flex justify-evenly"}
+                           inputStyle={
+                              "w-12 h-12 text-center text-xl font-extrabold text-purple-800 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded  outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+                           }
+                           inputType={"number"}
+                           shouldAutoFocus
+                           renderInput={(props) => <input {...props} />}
+                           skipDefaultStyles
+                        />
+
                         <div className="max-w-[260px] mx-auto mt-4">
                            <Button
                               // type="submit"
