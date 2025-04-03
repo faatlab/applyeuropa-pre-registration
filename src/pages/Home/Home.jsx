@@ -4,6 +4,7 @@ import img1 from '../../assets/img-1.png';
 import img2 from '../../assets/img-2.png';
 import img3 from '../../assets/img-3.png';
 import germany from '../../assets/Ger.webp';
+import quote from '../../assets/quote.svg';
 
 import {
   Button,
@@ -31,7 +32,6 @@ function Home() {
   const [isRegistered, setIsRegistered] = useState(false);
   const length = 6;
   const [otp, setOtp] = useState('');
-  const inputRefs = useRef([]);
 
   const { createDoc } = useFrappeCreateDoc();
   const { data } = useFrappeGetDocList('Student', {
@@ -52,23 +52,6 @@ function Home() {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
-  const getOtp = (index, value) => {
-    if (!isNaN(value) && value.length === 1) {
-      const newOtp = [...otp];
-      newOtp[index] = value.charAt(0); // Ensure only one character is stored
-      setOtp(newOtp);
-
-      if (index < length - 1 && inputRefs.current[index + 1]) {
-        inputRefs.current[index + 1].focus();
-      }
-    }
-  };
-
-  // const handlePaste = (event) => {
-  //    const data = event.clipboardData.getData("text");
-  //    console.log(data);
-  // };
 
   const requestOTP = async (e) => {
     e.preventDefault();
@@ -110,7 +93,6 @@ function Home() {
           entered_otp,
         }
       );
-      console.log(response);
 
       const { status } = response.data.message;
       if (status == 200) {
@@ -131,31 +113,31 @@ function Home() {
   };
 
   useEffect(() => {
-    // if (localStorage.getItem("AE")) {
-    //    setIsRegistered(true);
-    // }
-    localStorage.removeItem('AE');
+    if (localStorage.getItem('AE')) {
+      setIsRegistered(true);
+    }
   }, []);
 
   const settings = {
     fade: true,
     infinite: true,
-    speed: 500,
+    speed: 1500,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2500,
+    autoplaySpeed: 4500,
     pauseOnHover: false,
+    arrows: false,
   };
 
   return (
     <div className="relative overflow-hidden h-dvh">
-      <div className="absolute -bottom-100 -left-50 w-[700px] h-[700px] bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg animation-delay-4000 "></div>
+      <div className="absolute -bottom-150 -right-45 lg:-bottom-90 lg:-left-70 w-[700px] h-[700px] bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg animation-delay-4000 "></div>
       <div className="navBar w-20 mx-3 mt-5">
         <img src={mainlogo} alt="" />
       </div>
-      <div className="heroContainer gap-5 lg:gap-20 flex flex-col-reverse lg:flex-row justify-between items-center text-center lg:text-left px-5 lg:px-0 lg:mx-40">
-        <div className="heroContent my-auto w-full">
+      <div className="heroContainer gap-5 lg:gap-20 flex flex-col-reverse lg:flex-row text-center lg:text-left px-5 lg:px-0">
+        <div className="heroContent my-auto w-full lg:w-1/2 lg:ms-40">
           <div className="">
             {isRegistered ? (
               <h1 className=" lg:text-5xl text-4xl  font-semibold text-gray-700">
@@ -202,98 +184,137 @@ function Home() {
             </a>
           </div>
         </div>
-        <div className="heroCarouselContainer w-1/2 lg:w-1/3">
+        <div className="heroCarouselContainer relative h-100 lg:h-135 lg:w-[40%]">
+          <div className="absolute bottom-7 left-0 lg:-bottom-7 lg:-left-30 w-40 lg:w-90 h-40 lg:h-90  bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg"></div>
+          <div className="absolute top-0 left-0 lg:top-10 lg:right-63 w-50 lg:w-100 h-50 lg:h-100 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg animation-delay-2000"></div>
+          <div className="absolute bottom-16 right-20 lg:-bottom-10 lg:left-22 w-40 lg:w-90 h-40 lg:h-90  bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg animation-delay-4000"></div>
           <Slider {...settings}>
-            <div>
-              <img src={img1} alt="Slide 1" />
+            <div className="lg:h-140 h-130">
+              <div className="relative">
+                <div className="w-40 lg:w-60 bg-purple-400/20 p-3 rounded-xl absolute top-0 right-6 lg:right-20 backdrop-blur-lg z-10">
+                  <img src={quote} className="h-3 lg:h-5" alt="quote" />
+                  <p className="text-gray-800 text-sm">Hi I am Catherine</p>
+                </div>
+                <div className="mt-7  lg:w-100">
+                  <img
+                    src={img1}
+                    className="w-2/3 [mask-image:_linear-gradient(to_bottom,rgba(0,0,0,1)_90%,rgba(0,0,0,0)_100%)]"
+                    alt="Slide 1"
+                  />
+                </div>
+              </div>
             </div>
-            <div>
-              <img src={img2} alt="Slide 2" />
+            <div className="lg:h-140 h-130">
+              <div className="relative">
+                <div className="w-40 lg:w-60 bg-purple-400/20 p-3 rounded-xl absolute top-0 right-6 lg:right-20 backdrop-blur-lg z-10">
+                  <img src={quote} className="h-3 lg:h-5" alt="quote" />
+                  <p className="text-gray-800 text-sm">Hi I am Sorav</p>
+                </div>
+                <div className="mt-7  lg:w-100">
+                  <img
+                    src={img2}
+                    className="w-2/3 [mask-image:_linear-gradient(to_bottom,rgba(0,0,0,1)_90%,rgba(0,0,0,0)_100%)]"
+                    alt="Slide 2"
+                  />
+                </div>
+              </div>
             </div>
-            <div>
-              <img src={img3} alt="Slide 3" />
+            <div className="lg:h-140 h-130">
+              <div className="relative">
+                <div className="w-40 lg:w-60 bg-purple-400/20 p-3 rounded-xl absolute top-0 right-6 lg:right-20 backdrop-blur-lg z-10">
+                  <img src={quote} className="h-3 lg:h-5" alt="quote" />
+                  <p className="text-gray-800 text-sm">Hi I am Riyas</p>
+                </div>
+                <div className="mt-7  lg:w-100">
+                  <img
+                    src={img3}
+                    className="w-2/3 [mask-image:_linear-gradient(to_bottom,rgba(0,0,0,1)_90%,rgba(0,0,0,0)_100%)]"
+                    alt="Slide 3"
+                  />
+                </div>
+              </div>
             </div>
           </Slider>
         </div>
       </div>
-      <div class="w-full max-w-2xl mx-auto px-4 md:px-6 mt-10">
+      <div className="w-full max-w-2xl mx-auto px-4 md:px-6 mt-12">
         <div className="">
-          <h2 className=" text-3xl font-bold text-gray-600">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          <h2 className="text-center text-2xl font-bold text-gray-600">
+            Explore your education
           </h2>
         </div>
-        <div class="text-center ">
-          <div class="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
+        <div className="mt-5 text-center ">
+          <div className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
             <ul
               x-ref="logos"
-              class="flex items-center gap-1.7 mx-1.7 justify-center md:justify-start [&_img]:max-w-none marqueeDiv"
+              className="flex items-center gap-1.7 mx-1.7 justify-center md:justify-start [&_img]:max-w-none marqueeDiv"
             >
-              <li class="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
+              <li className="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
                 <img className="w-9 p-1" src={germany} alt="" />
                 germany
               </li>
-              <li class="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
+              <li className="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
                 <img className="w-9 p-1" src={germany} alt="" />
                 germany
               </li>
-              <li class="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
+              <li className="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
                 <img className="w-9 p-1" src={germany} alt="" />
                 germany
               </li>
-              <li class="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
+              <li className="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
                 <img className="w-9 p-1" src={germany} alt="" />
                 germany
               </li>
-              <li class="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
+              <li className="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
                 <img className="w-9 p-1" src={germany} alt="" />
                 germany
               </li>
-              <li class="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
+              <li className="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
                 <img className="w-9 p-1" src={germany} alt="" />
                 germany
               </li>
-              <li class="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
+              <li className="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
                 <img className="w-9 p-1" src={germany} alt="" />
                 germany
               </li>
-              <li class="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
+              <li className="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
                 <img className="w-9 p-1" src={germany} alt="" />
                 germany
               </li>
             </ul>
             <ul
               x-ref="logos"
-              class="flex items-center gap-1.7   justify-center md:justify-start [&_img]:max-w-none marqueeDiv"
+              className="flex items-center gap-1.7   justify-center md:justify-start [&_img]:max-w-none marqueeDiv"
             >
-              <li class="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
+              <li className="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
                 <img className="w-9 p-1" src={germany} alt="" />
                 germany
               </li>
-              <li class="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
+              <li className="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
                 <img className="w-9 p-1" src={germany} alt="" />
                 germany
               </li>
-              <li class="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
+              <li className="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
                 <img className="w-9 p-1" src={germany} alt="" />
                 germany
               </li>
-              <li class="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
+              <li className="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
                 <img className="w-9 p-1" src={germany} alt="" />
                 germany
               </li>
-              <li class="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
+              <li className="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
                 <img className="w-9 p-1" src={germany} alt="" />
                 germany
               </li>
-              <li class="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
+              <li className="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
                 <img className="w-9 p-1" src={germany} alt="" />
                 germany
               </li>
-              <li class="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
+              <li className="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
                 <img className="w-9 p-1" src={germany} alt="" />
                 germany
               </li>
-              <li class="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
+              <li className="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
                 <img className="w-9 p-1" src={germany} alt="" />
                 germany
               </li>
