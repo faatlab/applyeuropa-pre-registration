@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import mainlogo from '../../assets/applyeuropa-logo.svg';
 import img1 from '../../assets/img-1.png';
 import img2 from '../../assets/img-2.png';
@@ -132,15 +132,15 @@ function Home() {
 
   return (
     <div className="relative overflow-hidden h-dvh">
-      <div className="absolute -bottom-150 -right-45 lg:-bottom-90 lg:-left-70 w-[700px] h-[700px] bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg animation-delay-4000 "></div>
+      <div className="absolute hidden lg:block -bottom-90 -left-70 w-[700px] h-[700px] bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg animation-delay-4000 "></div>
       <div className="navBar w-20 mx-3 mt-5">
         <img src={mainlogo} alt="" />
       </div>
-      <div className="heroContainer gap-5 lg:gap-20 flex flex-col-reverse lg:flex-row text-center lg:text-left px-5 lg:px-0">
+      <div className="heroContainer gap-5 lg:gap-20 flex flex-col-reverse lg:flex-row text-center lg:text-left px-2 lg:px-0">
         <div className="heroContent my-auto w-full lg:w-1/2 lg:ms-40">
           <div className="">
             {isRegistered ? (
-              <h1 className=" lg:text-5xl text-4xl  font-semibold text-gray-700">
+              <h1 className=" lg:text-5xl text-2xl  font-semibold text-gray-700">
                 <span
                   style={{ fontFamily: 'myFont2' }}
                   className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent text-6xl"
@@ -152,14 +152,14 @@ function Home() {
               </h1>
             ) : (
               <>
-                <h1 className="lg:text-5xl text-3xl  font-semibold text-gray-700">
+                <h1 className="lg:text-5xl text-2xl  font-semibold text-gray-700">
                   Study in{' '}
                   <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                     Europe{' '}
                   </span>
                   with expert guidance and endless opportunities.
                 </h1>
-                <h1 className="lg:text-5xl text-3xl  font-semibold text-gray-700">
+                <h1 className="lg:text-5xl text-2xl  font-semibold text-gray-700">
                   Pre-register today!
                 </h1>
                 <div className="mt-7">
@@ -184,51 +184,51 @@ function Home() {
             </a>
           </div>
         </div>
-        <div className="heroCarouselContainer relative h-100 lg:h-135 lg:w-[40%]">
-          <div className="absolute bottom-7 left-0 lg:-bottom-7 lg:-left-30 w-40 lg:w-90 h-40 lg:h-90  bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg"></div>
-          <div className="absolute top-0 left-0 lg:top-10 lg:right-63 w-50 lg:w-100 h-50 lg:h-100 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg animation-delay-2000"></div>
-          <div className="absolute bottom-16 right-20 lg:-bottom-10 lg:left-22 w-40 lg:w-90 h-40 lg:h-90  bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg animation-delay-4000"></div>
+        <div className="heroCarouselContainer relative h-80 lg:h-135 lg:w-[40%]">
+          <div className="absolute bottom-7 left-20 lg:-bottom-7 lg:-left-30 w-30 h-30 lg:w-90  lg:h-90  bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg"></div>
+          <div className="absolute top-12 left-25 lg:top-10 lg:right-63 w-40 h-40 lg:w-100  lg:h-100 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg animation-delay-2000"></div>
+          <div className="absolute bottom-10 right-25 lg:-bottom-10 lg:left-22 w-30 h-30 lg:w-90  lg:h-90  bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg animation-delay-4000"></div>
           <Slider {...settings}>
-            <div className="lg:h-140 h-130">
-              <div className="relative">
-                <div className="w-40 lg:w-60 bg-purple-400/20 p-3 rounded-xl absolute top-0 right-6 lg:right-20 backdrop-blur-lg z-10">
+            <div className="lg:h-140 h-80">
+              <div className="relative h-full">
+                <div className="w-40 lg:w-60 bg-purple-400/20 p-3 rounded-xl absolute top-0 right-2 lg:right-20 backdrop-blur-lg z-10">
                   <img src={quote} className="h-3 lg:h-5" alt="quote" />
-                  <p className="text-gray-800 text-sm">Hi I am Catherine</p>
+                  <p className="text-gray-800 text-xs">Hi I am Catherine. I can help you with education</p>
                 </div>
-                <div className="mt-7  lg:w-100">
+                <div className="absolute bottom-0 flex justify-center lg:w-100">
                   <img
                     src={img1}
-                    className="w-2/3 [mask-image:_linear-gradient(to_bottom,rgba(0,0,0,1)_90%,rgba(0,0,0,0)_100%)]"
+                    className="w-1/2 lg:w-full [mask-image:_linear-gradient(to_bottom,rgba(0,0,0,1)_90%,rgba(0,0,0,0)_100%)]"
                     alt="Slide 1"
                   />
                 </div>
               </div>
             </div>
-            <div className="lg:h-140 h-130">
-              <div className="relative">
-                <div className="w-40 lg:w-60 bg-purple-400/20 p-3 rounded-xl absolute top-0 right-6 lg:right-20 backdrop-blur-lg z-10">
+            <div className="lg:h-140 h-80">
+              <div className="relative h-full">
+                <div className="w-40 lg:w-60 bg-purple-400/20 p-3 rounded-xl absolute top-0 right-2 lg:right-20 backdrop-blur-lg z-10">
                   <img src={quote} className="h-3 lg:h-5" alt="quote" />
                   <p className="text-gray-800 text-sm">Hi I am Sorav</p>
                 </div>
-                <div className="mt-7  lg:w-100">
+                <div className="absolute bottom-0 flex justify-center lg:w-100">
                   <img
                     src={img2}
-                    className="w-2/3 [mask-image:_linear-gradient(to_bottom,rgba(0,0,0,1)_90%,rgba(0,0,0,0)_100%)]"
+                    className="w-1/2 lg:w-full [mask-image:_linear-gradient(to_bottom,rgba(0,0,0,1)_90%,rgba(0,0,0,0)_100%)]"
                     alt="Slide 2"
                   />
                 </div>
               </div>
             </div>
-            <div className="lg:h-140 h-130">
-              <div className="relative">
-                <div className="w-40 lg:w-60 bg-purple-400/20 p-3 rounded-xl absolute top-0 right-6 lg:right-20 backdrop-blur-lg z-10">
+            <div className="lg:h-140 h-80">
+              <div className="relative h-full">
+                <div className="w-40 lg:w-60 bg-purple-400/20 p-3 rounded-xl absolute top-0 right-2 lg:right-20 backdrop-blur-lg z-10">
                   <img src={quote} className="h-3 lg:h-5" alt="quote" />
                   <p className="text-gray-800 text-sm">Hi I am Riyas</p>
                 </div>
-                <div className="mt-7  lg:w-100">
+                <div className="absolute bottom-0 flex justify-center lg:w-100">
                   <img
                     src={img3}
-                    className="w-2/3 [mask-image:_linear-gradient(to_bottom,rgba(0,0,0,1)_90%,rgba(0,0,0,0)_100%)]"
+                    className="w-1/2 lg:w-full [mask-image:_linear-gradient(to_bottom,rgba(0,0,0,1)_90%,rgba(0,0,0,0)_100%)]"
                     alt="Slide 3"
                   />
                 </div>
@@ -237,9 +237,9 @@ function Home() {
           </Slider>
         </div>
       </div>
-      <div className="w-full max-w-2xl mx-auto px-4 md:px-6 mt-12">
+      <div className="w-full max-w-2xl mx-auto px-4 md:px-6 mt-4 lg:mt-12">
         <div className="">
-          <h2 className="text-center text-2xl font-bold text-gray-600">
+          <h2 className="text-center text-xl lg:text-2xl font-bold text-gray-600">
             Explore your education
           </h2>
         </div>
