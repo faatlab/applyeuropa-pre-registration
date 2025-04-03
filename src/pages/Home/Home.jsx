@@ -186,7 +186,7 @@ function Home() {
         </div>
         <div className="heroCarouselContainer relative h-80 lg:h-135 lg:w-[40%]">
           <div className="absolute bottom-7 left-20 lg:-bottom-7 lg:-left-30 w-30 h-30 lg:w-90  lg:h-90  bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg"></div>
-          <div className="absolute top-12 left-25 lg:top-10 lg:right-63 w-40 h-40 lg:w-100  lg:h-100 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg animation-delay-2000"></div>
+          <div className="absolute top-12 left-25 lg:top-10 lg:left-0 w-40 h-40 lg:w-100  lg:h-100 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg animation-delay-2000"></div>
           <div className="absolute bottom-10 right-25 lg:-bottom-10 lg:left-22 w-30 h-30 lg:w-90  lg:h-90  bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg animation-delay-4000"></div>
           <Slider {...settings}>
             <div className="lg:h-140 h-80">
