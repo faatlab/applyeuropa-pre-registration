@@ -31,7 +31,7 @@ input[type='number'] {
 }
 
 .divBg {
-  animation: blob 4s infinite ease-in-out;
+  animation: blob 5s infinite ease-in-out;
 }
 
 @keyframes blob {
@@ -73,7 +73,7 @@ input[type='number'] {
      transform: translateX(0);
    }
    100% {
-     transform: translateX(-50%);
+     transform: translateX(-100%);
    }
  }
 

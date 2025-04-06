@@ -146,7 +146,7 @@ function Home() {
         <div className="heroContent flex items-center w-full lg:ps-40">
           <div className="">
             {isRegistered ? (
-              <h1 className="text-2xl md:text-4xl lg:text-5xl font-semibold text-gray-700">
+              <h1 className=" lg:text-5xl text-2xl  font-semibold text-gray-700">
                 <span
                   style={{ fontFamily: 'myFont2' }}
                   className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent text-6xl"
@@ -158,14 +158,14 @@ function Home() {
               </h1>
             ) : (
               <>
-                <h1 className="text-2xl md:text-4xl lg:text-5xl font-semibold text-gray-700">
+                <h1 className="lg:text-5xl text-2xl  font-semibold text-gray-700">
                   Study in{' '}
                   <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                     Europe{' '}
                   </span>
                   with expert guidance and endless opportunities.
                 </h1>
-                <h1 className="text-2xl md:text-4xl lg:text-5xl font-semibold text-gray-700">
+                <h1 className="lg:text-5xl text-2xl  font-semibold text-gray-700">
                   Pre-register today!
                 </h1>
                 <div className="mt-7">
@@ -181,17 +181,17 @@ function Home() {
             )}
           </div>
         </div>
-        <div className="heroCarouselContainer relative w-full">
+        <div className="heroCarouselContainer relative w-full flex justify-center items-center">
           <div className="absolute -z-10 bottom-7 left-20 lg:-bottom-7 lg:left-26 w-30 h-30 lg:w-90  lg:h-90  bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg"></div>
           <div className="absolute -z-10 top-12 left-25 lg:-top-10 lg:left-40 w-40 h-40 lg:w-100  lg:h-100 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg animation-delay-2000"></div>
           <div className="absolute -z-10 bottom-10 right-25 lg:hidden w-30 h-30 lg:w-90  lg:h-90  bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg animation-delay-4000"></div>
           <div className="lg:hidden">
             <Slider {...settings}>
-              <div className="h-80 md:h-120 lg:h-140">
+              <div className="lg:h-140 h-80">
                 <div className="relative h-full">
-                  <div className="w-40 lg:w-60 bg-purple-400/20 p-3 rounded-xl absolute top-0 right-2 md:right-20 backdrop-blur-lg z-10">
-                    <img src={quote} className="h-2 md:h-3 lg:h-5" alt="quote" />
-                    <p className="text-gray-800 text-xs md:text-sm">
+                  <div className="w-40 lg:w-60 bg-purple-400/20 p-3 rounded-xl absolute top-0 right-2 lg:right-20 backdrop-blur-lg z-10">
+                    <img src={quote} className="h-3 lg:h-5" alt="quote" />
+                    <p className="text-gray-800 text-xs">
                       Hi I am Catherine. I can help you with education
                     </p>
                   </div>
@@ -204,11 +204,11 @@ function Home() {
                   </div>
                 </div>
               </div>
-              <div className="h-80 md:h-120 lg:h-140">
+              <div className="lg:h-140 h-80">
                 <div className="relative h-full">
-                  <div className="w-40 lg:w-60 bg-purple-400/20 p-3 rounded-xl absolute top-0 right-2 md:right-20 backdrop-blur-lg z-10">
-                    <img src={quote} className="h-2 md:h-3 lg:h-5" alt="quote" />
-                    <p className="text-gray-800 text-xs md:text-sm">Hi I am Sorav</p>
+                  <div className="w-40 lg:w-60 bg-purple-400/20 p-3 rounded-xl absolute top-0 right-2 lg:right-20 backdrop-blur-lg z-10">
+                    <img src={quote} className="h-3 lg:h-5" alt="quote" />
+                    <p className="text-gray-800 text-sm">Hi I am Sorav</p>
                   </div>
                   <div className="absolute bottom-0 flex justify-center lg:w-100">
                     <img
@@ -219,11 +219,11 @@ function Home() {
                   </div>
                 </div>
               </div>
-              <div className="h-80 md:h-120 lg:h-140">
+              <div className="lg:h-140 h-80">
                 <div className="relative h-full">
-                  <div className="w-40 lg:w-60 bg-purple-400/20 p-3 rounded-xl absolute top-0 right-2 md:right-20 backdrop-blur-lg z-10">
-                    <img src={quote} className="h-2 md:h-3 lg:h-5" alt="quote" />
-                    <p className="text-gray-800 text-xs md:text-sm">Hi I am Riyas</p>
+                  <div className="w-40 lg:w-60 bg-purple-400/20 p-3 rounded-xl absolute top-0 right-2 lg:right-20 backdrop-blur-lg z-10">
+                    <img src={quote} className="h-3 lg:h-5" alt="quote" />
+                    <p className="text-gray-800 text-sm">Hi I am Riyas</p>
                   </div>
                   <div className="absolute bottom-0 flex justify-center lg:w-100">
                     <img
@@ -236,11 +236,11 @@ function Home() {
               </div>
             </Slider>
           </div>
-          <div className="hidden lg:flex lg:justify-center">
+          <div className='hidden lg:block'>
             <iframe
               width="250"
               height="450"
-              src="https://www.youtube.com/embed/bF2xL8Xsj-E?controls=1"
+              src="https://www.youtube.com/embed/bF2xL8Xsj-E"
               title="Meet Our Mentors | ApplyEuropa"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -254,19 +254,19 @@ function Home() {
       <div className="flex justify-center lg:hidden">
         <iframe
           width="250"
-          height="448"
+          height="450"
           src="https://www.youtube.com/embed/bF2xL8Xsj-E"
           title="Meet Our Mentors | ApplyEuropa"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin"
           allowfullscreen
-          className="rounded-xl shadow-xl shadow-pink-300/70 my-6 w-[250px] h-[448px] md:h-[600px] md:w-[338px]"
+          className="rounded-xl shadow-xl shadow-pink-300/70 my-6"
         ></iframe>
       </div>
       <div className="w-full max-w-2xl mx-auto px-4 md:px-6 mt-4 lg:mt-12">
         <div className="">
-          <h2 className="text-center text-xl md:text-2xl font-bold text-gray-600">
+          <h2 className="text-center text-xl lg:text-2xl font-bold text-gray-600">
             Explore your education
           </h2>
         </div>
@@ -315,19 +315,19 @@ function Home() {
             >
               <li className="h-10 text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
                 <img className="h-full p-1" src={germany} alt="" />
-                Germany
+                germany
               </li>
               <li className="h-10 text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
                 <img className="h-full p-1" src={italy} alt="" />
-                Italy
+                italy
               </li>
               <li className="h-10 text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
                 <img className="h-full p-1" src={france} alt="" />
-                France
+                france
               </li>
               <li className="h-10 text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
                 <img className="h-full p-1" src={latvia} alt="" />
-                Latvia
+                latvia
               </li>
               <li className="h-10 text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center dark:focus:ring-gray-500 me-2 mb-2">
                 <img className="h-full p-1" src={lithuania} alt="" />
