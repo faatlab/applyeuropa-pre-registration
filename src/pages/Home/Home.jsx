@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import mainlogo from '../../assets/applyeuropa-logo.svg';
-import img1 from '../../assets/img-1.png';
-import img2 from '../../assets/img-2.png';
-import img3 from '../../assets/img-3.png';
+// import img1 from '../../assets/img-1.png';
+// import img2 from '../../assets/img-2.png';
+// import img3 from '../../assets/img-3.png';
 import germany from '../../assets/Germany.svg';
 import italy from '../../assets/Italy.svg';
 import france from '../../assets/France.svg';
@@ -11,7 +11,7 @@ import lithuania from '../../assets/Lithuania.svg';
 import hungary from '../../assets/Hungary.svg';
 import austria from '../../assets/Austria.svg';
 import uk from '../../assets/uk.svg';
-import quote from '../../assets/quote.svg';
+// import quote from '../../assets/quote.svg';
 import {
   Button,
   Label,
@@ -139,33 +139,29 @@ function Home() {
   return (
     <div className="relative overflow-hidden lg:h-dvh">
       <div className="absolute hidden lg:block -bottom-110 -left-70 w-[700px] h-[700px] bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg animation-delay-4000 "></div>
-      <div className="navBar w-20 mx-3 mt-5">
+      <div className="navBar w-27 mx-3 mt-5">
         <img src={mainlogo} alt="" />
       </div>
-      <div className="heroContainer mt-6 gap-5 lg:gap-20 flex flex-col-reverse lg:flex-row text-center lg:text-left px-2 lg:px-0">
-        <div className="heroContent flex items-center w-full lg:ps-40">
+      <div className="heroContainer mt-6 gap-5 lg:gap-20 flex flex-col lg:flex-row lg:mx-20 justify-center text-center lg:text-left px-2 lg:px-0">
+        <div className="heroContent flex items-center w-full lg:ps-10">
           <div className="">
             {isRegistered ? (
-              <h1 className="text-2xl md:text-4xl lg:text-5xl font-semibold text-gray-700">
+              <h1 className="selection:bg-purple-300 text-2xl md:text-4xl lg:text-5xl font-semibold text-gray-700">
                 <span
                   style={{ fontFamily: 'myFont2' }}
                   className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent text-6xl"
                 >
                   Congratulations!
                 </span>{' '}
-                You’ve successfully registered. We’re thrilled to have you
+                You’ve successfully Pre-registered. We’re thrilled to have you
                 onboard.
               </h1>
             ) : (
               <>
-                <h1 className="text-2xl md:text-4xl lg:text-5xl font-semibold text-gray-700">
-                  Study in{' '}
-                  <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
-                    Europe{' '}
-                  </span>
-                  with expert guidance and endless opportunities.
+                <h1 className=" selection:bg-purple-300 text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-700">
+                  Why settle for a mediocre agent <br className='hidden lg:block' /> if you can directly connect with <br className='hidden lg:block' /> experts<span className='bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent'> Worldwide</span>
                 </h1>
-                <h1 className="text-2xl md:text-4xl lg:text-5xl font-semibold text-gray-700">
+                <h1 className="animated-bg curve  p-1 selection:bg-purple-300  text-2xl md:text-4xl lg:text-[40px] font-semibold   text-gray-700 mt-5 ">
                   Pre-register today!
                 </h1>
                 <div className="mt-7">
@@ -181,11 +177,11 @@ function Home() {
             )}
           </div>
         </div>
-        <div className="heroCarouselContainer relative w-full">
-          <div className="absolute -z-10 bottom-7 left-20 lg:-bottom-7 lg:left-26 w-30 h-30 lg:w-90  lg:h-90  bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg"></div>
-          <div className="absolute -z-10 top-12 left-25 lg:-top-10 lg:left-40 w-40 h-40 lg:w-100  lg:h-100 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg animation-delay-2000"></div>
+        <div className="heroCarouselContainer relative flex justify-center w-full lg:w-1/2">
+          <div className="absolute -z-10 bottom-7 left-20 lg:-bottom-7 lg:left-0 w-30 h-30 lg:w-90  lg:h-90  bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg"></div>
+          <div className="absolute -z-10 top-12 left-25 lg:-top-10 lg:left-5 w-40 h-40 lg:w-100  lg:h-100 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg animation-delay-2000"></div>
           <div className="absolute -z-10 bottom-10 right-25 lg:hidden w-30 h-30 lg:w-90  lg:h-90  bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg animation-delay-4000"></div>
-          <div className="lg:hidden">
+          {/* <div className="lg:hidden">
             <Slider {...settings}>
               <div className="h-80 md:h-120 lg:h-140">
                 <div className="relative h-full">
@@ -235,11 +231,11 @@ function Home() {
                 </div>
               </div>
             </Slider>
-          </div>
-          <div className="hidden lg:flex lg:justify-center">
+          </div> */}
+          <div className="flex justify-end">
             <iframe
               width="250"
-              height="450"
+              height="444"
               src="https://www.youtube.com/embed/bF2xL8Xsj-E?controls=1"
               title="Meet Our Mentors | ApplyEuropa"
               frameborder="0"
@@ -251,7 +247,7 @@ function Home() {
           </div>
         </div>
       </div>
-      <div className="flex justify-center lg:hidden">
+      {/* <div className="flex justify-center lg:hidden">
         <iframe
           width="250"
           height="448"
@@ -263,11 +259,11 @@ function Home() {
           allowfullscreen
           className="rounded-xl shadow-xl shadow-pink-300/70 my-6 w-[250px] h-[448px] md:h-[600px] md:w-[338px]"
         ></iframe>
-      </div>
-      <div className="w-full max-w-2xl mx-auto px-4 md:px-6 mt-4 lg:mt-12">
+      </div> */}
+      <div className="w-full max-w-2xl mx-auto px-4 md:px-6 mt-7 lg:mt-12 ">
         <div className="">
-          <h2 className="text-center text-xl md:text-2xl font-bold text-gray-600">
-            Explore your education
+          <h2 className="text-center text-[18px]  md:text-2xl  font-bold text-gray-600">
+            Explore our locations 
           </h2>
         </div>
         <div className="mt-5 text-center ">
@@ -367,7 +363,7 @@ function Home() {
         <Modal show={openModal} size="md" onClose={onCloseModal} popup>
           <ModalHeader />
           <ModalBody>
-            <form onSubmit={requestOTP} className="space-y-4">
+            <form onSubmit={requestOTP} className="space-y-3">
               <h2 className="text-center font-semibold text-2xl text-purple-700">
                 Sign Up for Pre-Registration
               </h2>
@@ -432,6 +428,21 @@ function Home() {
                   name="location"
                   type={'text'}
                   placeholder="Enter Your Location"
+                  onChange={getFormData}
+                  required
+                />
+              </div>
+              <div>
+                <div className="mb-2 block">
+                  <Label htmlFor="country" className="font-medium">
+                  Preferred Country 
+                  </Label>
+                </div>
+                <TextInput
+                  id="location"
+                  name="location"
+                  type={'text'}
+                  placeholder="Enter  Preferred Country"
                   onChange={getFormData}
                   required
                 />
