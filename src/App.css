@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 @plugin "flowbite-react/plugin/tailwindcss";
 @source "../.flowbite-react/class-list.json";
-
+/* 
 @font-face {
   font-family: myFont;
   src: url(../src/assets/itfont-Regular.otf);
@@ -14,6 +14,12 @@
 
 * {
   font-family: myFont;
+} */
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 input::-webkit-outer-spin-button,
@@ -96,21 +102,23 @@ input[type='number'] {
 
 .animated-bg {
   display: inline-block;
-  background: linear-gradient(to right, oklch(82.7% 0.119 306.383) 50%, transparent 50%);
-  /* background-color: #e1bee7; */
+  background: linear-gradient(to right, oklch(55.8% 0.288 302.321) 50%, transparent 50%);
   background-size: 200% 100%;
-  background-position: left;
+  background-position: right;
   animation: fillBg 6s forwards;
 }
 
 @keyframes fillBg {
   0% {
-    background-position: right;
+    color: #fff;
   }
-  33% {
-    background-position: left;
+  15% {
+    color: #fff;
+    background-position: right;
+    /* background-position: left; */
   }
   66% {
+    color: #fff;
     background-position: left;
   }
   100% {

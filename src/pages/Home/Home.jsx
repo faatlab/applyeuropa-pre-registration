@@ -124,17 +124,7 @@ function Home() {
     }
   }, []);
 
-  const settings = {
-    fade: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 4500,
-    pauseOnHover: false,
-    arrows: false,
-  };
+
 
   return (
     <div className="relative overflow-hidden lg:h-dvh">
@@ -181,57 +171,7 @@ function Home() {
           <div className="absolute -z-10 bottom-7 left-20 lg:-bottom-7 lg:left-0 w-30 h-30 lg:w-90  lg:h-90  bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg"></div>
           <div className="absolute -z-10 top-12 left-25 lg:-top-10 lg:left-5 w-40 h-40 lg:w-100  lg:h-100 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg animation-delay-2000"></div>
           <div className="absolute -z-10 bottom-10 right-25 lg:hidden w-30 h-30 lg:w-90  lg:h-90  bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg animation-delay-4000"></div>
-          {/* <div className="lg:hidden">
-            <Slider {...settings}>
-              <div className="h-80 md:h-120 lg:h-140">
-                <div className="relative h-full">
-                  <div className="w-40 lg:w-60 bg-purple-400/20 p-3 rounded-xl absolute top-0 right-2 md:right-20 backdrop-blur-lg z-10">
-                    <img src={quote} className="h-2 md:h-3 lg:h-5" alt="quote" />
-                    <p className="text-gray-800 text-xs md:text-sm">
-                      Hi I am Catherine. I can help you with education
-                    </p>
-                  </div>
-                  <div className="absolute bottom-0 flex justify-center lg:w-100">
-                    <img
-                      src={img1}
-                      className="w-1/2 lg:w-full [mask-image:_linear-gradient(to_bottom,rgba(0,0,0,1)_90%,rgba(0,0,0,0)_100%)]"
-                      alt="Slide 1"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="h-80 md:h-120 lg:h-140">
-                <div className="relative h-full">
-                  <div className="w-40 lg:w-60 bg-purple-400/20 p-3 rounded-xl absolute top-0 right-2 md:right-20 backdrop-blur-lg z-10">
-                    <img src={quote} className="h-2 md:h-3 lg:h-5" alt="quote" />
-                    <p className="text-gray-800 text-xs md:text-sm">Hi I am Sorav</p>
-                  </div>
-                  <div className="absolute bottom-0 flex justify-center lg:w-100">
-                    <img
-                      src={img2}
-                      className="w-1/2 lg:w-full [mask-image:_linear-gradient(to_bottom,rgba(0,0,0,1)_90%,rgba(0,0,0,0)_100%)]"
-                      alt="Slide 2"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="h-80 md:h-120 lg:h-140">
-                <div className="relative h-full">
-                  <div className="w-40 lg:w-60 bg-purple-400/20 p-3 rounded-xl absolute top-0 right-2 md:right-20 backdrop-blur-lg z-10">
-                    <img src={quote} className="h-2 md:h-3 lg:h-5" alt="quote" />
-                    <p className="text-gray-800 text-xs md:text-sm">Hi I am Riyas</p>
-                  </div>
-                  <div className="absolute bottom-0 flex justify-center lg:w-100">
-                    <img
-                      src={img3}
-                      className="w-1/2 lg:w-full [mask-image:_linear-gradient(to_bottom,rgba(0,0,0,1)_90%,rgba(0,0,0,0)_100%)]"
-                      alt="Slide 3"
-                    />
-                  </div>
-                </div>
-              </div>
-            </Slider>
-          </div> */}
+    
           <div className="flex justify-end">
             <iframe
               width="250"
@@ -247,19 +187,7 @@ function Home() {
           </div>
         </div>
       </div>
-      {/* <div className="flex justify-center lg:hidden">
-        <iframe
-          width="250"
-          height="448"
-          src="https://www.youtube.com/embed/bF2xL8Xsj-E"
-          title="Meet Our Mentors | ApplyEuropa"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen
-          className="rounded-xl shadow-xl shadow-pink-300/70 my-6 w-[250px] h-[448px] md:h-[600px] md:w-[338px]"
-        ></iframe>
-      </div> */}
+     
       <div className="w-full max-w-2xl mx-auto px-4 md:px-6 mt-7 lg:mt-12 ">
         <div className="">
           <h2 className="text-center text-[18px]  md:text-2xl  font-bold text-gray-600">
