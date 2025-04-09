@@ -24,6 +24,7 @@ import axios from "axios";
 import { useFrappeCreateDoc, useFrappeGetDocList } from "frappe-react-sdk";
 import { toast } from "sonner";
 import OTPInput from "react-otp-input";
+import { Eye, EyeOff } from "lucide-react";
 
 function Home() {
    const [openModal, setOpenModal] = useState(false);
@@ -167,6 +168,8 @@ function Home() {
          setIsResend(true);
       }
    }, [counter]);
+
+   const [showPassword, setShowPassword] = useState(false);
 
    return (
       <div className="relative overflow-hidden lg:h-dvh">
@@ -439,22 +442,35 @@ function Home() {
                               Your password
                            </Label>
                         </div>
-                        <TextInput
-                           id="password"
-                           type="password"
-                           name="password"
-                           pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
-                           title="Must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters"
-                           onChange={getFormData}
-                           placeholder="⁕ ⁕ ⁕ ⁕ ⁕ ⁕"
-                           color={
-                              validity.password === null
-                                 ? undefined
-                                 : validity.password
-                                 ? undefined
-                                 : "failure"
-                           }
-                        />
+                        <div className="relative">
+                           <TextInput
+                              id="password"
+                              type={showPassword ? "text" : "password"}
+                              name="password"
+                              pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
+                              title="Must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters"
+                              onChange={getFormData}
+                              placeholder="⁕ ⁕ ⁕ ⁕ ⁕ ⁕"
+                              color={
+                                 validity.password === null
+                                    ? undefined
+                                    : validity.password
+                                    ? undefined
+                                    : "failure"
+                              }
+                           />
+                           <button
+                              type="button"
+                              onClick={() => setShowPassword(!showPassword)}
+                              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                           >
+                              {showPassword ? (
+                                 <EyeOff size={20} />
+                              ) : (
+                                 <Eye size={20} />
+                              )}
+                           </button>
+                        </div>
                         <HelperText className="text-xs text-red-400">
                            {validity.password === false &&
                               "* Password must contain at least one number, one uppercase and lowercase, and at least 8 characters"}
@@ -539,7 +555,9 @@ function Home() {
                         ) : (
                            <div className="text-center text-sm text-slate-500 mt-4">
                               Didn't receive code? Request in{" "}
-                              <span className="text-indigo-500 font-bold">{counter}</span>
+                              <span className="text-indigo-500 font-bold">
+                                 {counter}
+                              </span>
                            </div>
                         )}
                      </form>
