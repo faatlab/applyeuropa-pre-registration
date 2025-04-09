@@ -42,6 +42,8 @@ function Home() {
    });
    const [isRegistered, setIsRegistered] = useState(false);
    const [otp, setOtp] = useState("");
+   const [counter, setCounter] = useState(300); // Delay in seconds
+   const [isResend, setIsResend] = useState(false);
 
    const { createDoc } = useFrappeCreateDoc();
    const { data } = useFrappeGetDocList("Student", {
@@ -94,6 +96,8 @@ function Home() {
 
    const requestOTP = async (e) => {
       e.preventDefault();
+      setIsResend(false);
+      setCounter(30);
       const { full_name, email, password, phone_number, location } = formData;
       const isUser = data.filter((item) => item.email == email);
       if (!full_name || !email || !password || !phone_number || !location) {
@@ -152,6 +156,18 @@ function Home() {
       }
    }, []);
 
+   useEffect(() => {
+      if (counter > 0) {
+         const timer = setTimeout(() => {
+            setCounter(counter - 1);
+         }, 1000);
+         console.log(counter);
+         return () => clearTimeout(timer);
+      } else {
+         setIsResend(true);
+      }
+   }, [counter]);
+
    return (
       <div className="relative overflow-hidden lg:h-dvh">
          <div className="absolute hidden lg:block -bottom-110 -left-70 w-[700px] h-[700px] bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 divBg animation-delay-4000 "></div>
@@ -169,7 +185,8 @@ function Home() {
                         >
                            Congratulations! <br className=" lg:hidden" />
                         </span>{" "}
-                        You're all set with <br /> pre-registration!  We're thrilled to have you onboard.
+                        You're all set with <br /> pre-registration! We're
+                        thrilled to have you onboard.
                      </h1>
                   ) : (
                      <>
@@ -190,7 +207,7 @@ function Home() {
                            <button
                               type="button"
                               onClick={() => setOpenModal(true)}
-                              className=" cursor-pointer text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:outline-none  shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-400/80 font-medium rounded-lg  px-10 py-3 text-center me-2 mb-2"
+                              className="cursor-pointer text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:outline-none  shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-400/80 font-medium rounded-lg  px-10 py-3 text-center me-2 mb-2"
                            >
                               Register Now
                            </button>
@@ -220,7 +237,7 @@ function Home() {
             </div>
          </div>
 
-         <div className="w-full max-w-2xl mx-auto px-4 md:px-6 mt-7 lg:mt-12 ">
+         <div className="w-full max-w-2xl mx-auto px-4 md:px-6">
             <div className="">
                <h2 className="text-center text-[18px]  md:text-2xl  font-bold text-gray-600">
                   Explore our locations
@@ -470,8 +487,18 @@ function Home() {
                         <div className="text-center font-semibold text-2xl text-purple-700">
                            <p>Email Verification</p>
                         </div>
-                        <div className="flex flex-row text-sm font-medium text-gray-400">
-                           <p>We have sent a code to {formData.email}</p>
+                        <div className="text-sm font-medium text-gray-400">
+                           <p>
+                              We have sent a code to{" "}
+                              <span className="font-bold">
+                                 {formData.email}
+                              </span>
+                              .
+                           </p>
+                           <p className="text-xs">
+                              Please chek your spam if you haven't received OTP
+                              mail yet.
+                           </p>
                         </div>
                      </div>
 
@@ -499,15 +526,22 @@ function Home() {
                               Verify OTP
                            </Button>
                         </div>
-                        <div className="text-center text-sm text-slate-500 mt-4">
-                           Didn't receive code?{" "}
-                           <button
-                              className="font-medium text-indigo-500 hover:text-indigo-600"
-                              onClick={requestOTP}
-                           >
-                              Resend
-                           </button>
-                        </div>
+                        {isResend ? (
+                           <div className="text-center text-sm text-slate-500 mt-4">
+                              Didn't receive code?{" "}
+                              <button
+                                 className="cursor-pointer font-medium text-indigo-500 hover:text-indigo-600"
+                                 onClick={requestOTP}
+                              >
+                                 Resend
+                              </button>
+                           </div>
+                        ) : (
+                           <div className="text-center text-sm text-slate-500 mt-4">
+                              Didn't receive code? Request in{" "}
+                              <span className="text-indigo-500 font-bold">{counter}</span>
+                           </div>
+                        )}
                      </form>
                   </div>
                </ModalBody>
