@@ -1,20 +1,12 @@
 @import 'tailwindcss';
 @plugin "flowbite-react/plugin/tailwindcss";
 @source "../.flowbite-react/class-list.json";
-/* 
-@font-face {
-  font-family: myFont;
-  src: url(../src/assets/itfont-Regular.otf);
-}
 
 @font-face {
   font-family: myFont2;
   src: url(../src/assets/Hello.ttf);
 }
 
-* {
-  font-family: myFont;
-} */
 
 .poppins-regular {
   font-family: "Poppins", sans-serif;
@@ -81,23 +73,6 @@ input[type='number'] {
   100% {
     transform: translateX(-100%);
   }
-}
-
-.carousel-container::-webkit-scrollbar {
-  display: none;
-}
-
-.carousel-container {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  overflow-y: hidden;
-}
-
-.check::after {
-  display: block;
-  background-color: aqua;
-  width: 100%;
-  height: 30px;
 }
 
 .animated-bg {
