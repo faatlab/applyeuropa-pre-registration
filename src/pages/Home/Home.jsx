@@ -162,19 +162,18 @@ function Home() {
             <div className="heroContent flex items-center w-full lg:ps-10">
                <div className="">
                   {isRegistered ? (
-                     <h1 className="selection:bg-purple-300 text-2xl md:text-4xl lg:text-5xl font-semibold text-gray-700">
+                     <h1 className=" text-2xl md:text-4xl lg:text-5xl/16 font-semibold text-gray-700 mt-4 lg:mt-0 px-6  ">
                         <span
                            style={{ fontFamily: "myFont2" }}
-                           className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent text-6xl"
+                           className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent text-5xl/20 lg:text-6xl"
                         >
-                           Congratulations!
+                           Congratulations! <br className=" lg:hidden" />
                         </span>{" "}
-                        You’ve successfully Pre-registered. We’re thrilled to
-                        have you onboard.
+                        You're all set with <br /> pre-registration!  We're thrilled to have you onboard.
                      </h1>
                   ) : (
                      <>
-                        <h1 className=" selection:bg-purple-300 text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-700">
+                        <h1 className="text-3xl md:text-4xl lg:text-5xl/15 font-semibold text-gray-700 mt-5 lg:mt-0 px-6 lg:px-0 ">
                            Why settle for a mediocre agent{" "}
                            <br className="hidden lg:block" /> if you can
                            directly connect with{" "}
