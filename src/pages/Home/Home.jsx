@@ -28,7 +28,7 @@ import { Eye, EyeOff } from "lucide-react";
 
 function Home() {
    const [openModal, setOpenModal] = useState(false);
-   const [open2Modal, setOpen2Modal] = useState(false);
+   // const [open2Modal, setOpen2Modal] = useState(false);
    const [formData, setFormData] = useState({
       full_name: "",
       email: "",
@@ -42,9 +42,10 @@ function Home() {
       password: null,
    });
    const [isRegistered, setIsRegistered] = useState(false);
-   const [otp, setOtp] = useState("");
-   const [counter, setCounter] = useState(300); // Delay in seconds
-   const [isResend, setIsResend] = useState(false);
+   const [showPassword, setShowPassword] = useState(false);
+   // const [otp, setOtp] = useState("");
+   // const [counter, setCounter] = useState(300); // Delay in seconds
+   // const [isResend, setIsResend] = useState(false);
 
    const { createDoc } = useFrappeCreateDoc();
    const { data } = useFrappeGetDocList("Student", {
@@ -56,10 +57,10 @@ function Home() {
       setFormData({});
    }
 
-   function onClose2Modal() {
-      setOpen2Modal(false);
-      setOtp(Array(length).fill(""));
-   }
+   // function onClose2Modal() {
+   //    setOpen2Modal(false);
+   //    setOtp(Array(length).fill(""));
+   // }
 
    const getFormData = (e) => {
       const { name, value } = e.target;
@@ -95,10 +96,68 @@ function Home() {
       }
    };
 
-   const requestOTP = async (e) => {
+   // ---------------------- OTP verification paused -----------------------------
+
+   // const requestOTP = async (e) => {
+   //    e.preventDefault();
+   //    setIsResend(false);
+   //    setCounter(30);
+   //    const { full_name, email, password, phone_number, location } = formData;
+   //    const isUser = data.filter((item) => item.email == email);
+   //    if (!full_name || !email || !password || !phone_number || !location) {
+   //       toast.error("Please fill all the fields");
+   //    } else if (isUser.length > 0) {
+   //       toast.warning(`E-mail already registered`);
+   //    } else {
+   //       setOpen2Modal(true);
+   //       try {
+   //          await axios.post(
+   //             `${
+   //                import.meta.env.VITE_FRAPPE_URL
+   //             }/api/method/applyeuropa.applyeuropa.doctype.student.student.send_otp_email`,
+   //             { email }
+   //          );
+   //       } catch (err) {
+   //          console.error(err);
+   //       }
+   //    }
+   // };
+
+   // const verifyOTP = async (e) => {
+   //    e.preventDefault();
+   //    try {
+   //       const response = await axios.post(
+   //          `${
+   //             import.meta.env.VITE_FRAPPE_URL
+   //          }/api/method/applyeuropa.applyeuropa.doctype.student.student.verify_otp`,
+   //          {
+   //             email: formData.email,
+   //             entered_otp: otp,
+   //          }
+   //       );
+
+   //       const { status } = response.data.message;
+   //       if (status == 200) {
+   //          createDoc("Student", formData).then(() => {
+   //             setIsRegistered(true);
+   //             localStorage.setItem("AE", "true");
+   //             setOpen2Modal(false);
+   //             setOpenModal(false);
+   //          });
+   //       } else if (status == 401) {
+   //          toast.warning("Invalid OTP");
+   //       } else if (status == 404) {
+   //          toast.warning("Expired OTP");
+   //       }
+   //    } catch (err) {
+   //       console.error(err);
+   //    }
+   // };
+
+   // ---------------------------------------------
+
+   const handleSubmit = (e) => {
       e.preventDefault();
-      setIsResend(false);
-      setCounter(30);
       const { full_name, email, password, phone_number, location } = formData;
       const isUser = data.filter((item) => item.email == email);
       if (!full_name || !email || !password || !phone_number || !location) {
@@ -106,70 +165,35 @@ function Home() {
       } else if (isUser.length > 0) {
          toast.warning(`E-mail already registered`);
       } else {
-         setOpen2Modal(true);
-         try {
-            await axios.post(
-               `${
-                  import.meta.env.VITE_FRAPPE_URL
-               }/api/method/applyeuropa.applyeuropa.doctype.student.student.send_otp_email`,
-               { email }
-            );
-         } catch (err) {
-            console.error(err);
-         }
-      }
-   };
-
-   const verifyOTP = async (e) => {
-      e.preventDefault();
-      try {
-         const response = await axios.post(
-            `${
-               import.meta.env.VITE_FRAPPE_URL
-            }/api/method/applyeuropa.applyeuropa.doctype.student.student.verify_otp`,
-            {
-               email: formData.email,
-               entered_otp: otp,
-            }
-         );
-
-         const { status } = response.data.message;
-         if (status == 200) {
-            createDoc("Student", formData).then(() => {
+         createDoc("Student", formData)
+            .then(() => {
                setIsRegistered(true);
-               localStorage.setItem("AE", "true");
-               setOpen2Modal(false);
                setOpenModal(false);
+               localStorage.setItem("AE", "true");
+            })
+            .catch((err) => {
+               toast.warning("Some internal error");
+               console.error(err);
             });
-         } else if (status == 401) {
-            toast.warning("Invalid OTP");
-         } else if (status == 404) {
-            toast.warning("Expired OTP");
-         }
-      } catch (err) {
-         console.error(err);
       }
    };
-
    useEffect(() => {
       if (localStorage.getItem("AE")) {
          setIsRegistered(true);
       }
    }, []);
 
-   useEffect(() => {
-      if (counter > 0) {
-         const timer = setTimeout(() => {
-            setCounter(counter - 1);
-         }, 1000);
-         console.log(counter);
-         return () => clearTimeout(timer);
-      } else {
-         setIsResend(true);
-      }
-   }, [counter]);
-
-   const [showPassword, setShowPassword] = useState(false);
+   // useEffect(() => {
+   //    if (counter > 0) {
+   //       const timer = setTimeout(() => {
+   //          setCounter(counter - 1);
+   //       }, 1000);
+   //       console.log(counter);
+   //       return () => clearTimeout(timer);
+   //    } else {
+   //       setIsResend(true);
+   //    }
+   // }, [counter]);
 
    return (
       <div className="relative overflow-hidden lg:h-dvh">
@@ -343,7 +367,7 @@ function Home() {
             <Modal show={openModal} size="md" onClose={onCloseModal} popup>
                <ModalHeader />
                <ModalBody>
-                  <form onSubmit={requestOTP} className="">
+                  <form onSubmit={handleSubmit}>
                      <h2 className="text-center font-semibold text-2xl text-purple-700">
                         Sign Up for Pre-Registration
                      </h2>
@@ -392,10 +416,12 @@ function Home() {
                            </Label>
                         </div>
                         <TextInput
-                           id="number"
+                           id="phone_number"
                            name="phone_number"
                            pattern="[0-9]+"
-                           type={"number"}
+                           type="text"
+                           minLength={10}
+                           maxLength={10}
                            title="Must be a valid mobile number"
                            placeholder="Enter Your Mobile Number"
                            onChange={getFormData}
@@ -489,7 +515,8 @@ function Home() {
                </ModalBody>
             </Modal>
 
-            <Modal
+            {/* OTP Modal paused */}
+            {/* <Modal
                show={open2Modal}
                size="md"
                onClose={onClose2Modal}
@@ -563,7 +590,7 @@ function Home() {
                      </form>
                   </div>
                </ModalBody>
-            </Modal>
+            </Modal> */}
          </>
       </div>
    );
